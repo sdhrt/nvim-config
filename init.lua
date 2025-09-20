@@ -12,6 +12,8 @@ vim.g.have_nerd_font = true
 -- Make line numbers default
 vim.o.number = true
 
+vim.o.tabstop = 4
+
 -- Enable mouse mode, can be useful for resizing splits for example!
 vim.o.mouse = 'a'
 
@@ -357,7 +359,8 @@ require('lazy').setup({
         python = { 'isort', 'black' },
         --
         -- You can use 'stop_after_first' to run the first available formatter from the list
-        -- javascript = { "prettierd", "prettier", stop_after_first = true },
+        javascript = { 'prettierd', 'prettier', stop_after_first = true },
+        typescript = { 'prettierd', 'prettier', stop_after_first = true },
       },
     },
   },
@@ -465,6 +468,7 @@ require('lazy').setup({
   require 'kickstart.plugins.indent_line',
   require 'kickstart.plugins.autopairs',
   require 'custom.plugins.nvimtree',
+  require 'custom.plugins.neorg',
 }, {
   ui = {
     icons = vim.g.have_nerd_font and {} or {
