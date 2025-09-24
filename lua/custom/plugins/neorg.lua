@@ -21,6 +21,11 @@ return {
     }
     vim.keymap.set('n', '<Leader>j', '<cmd>Neorg journal today<CR>')
     vim.wo.foldlevel = 99
-    vim.wo.conceallevel = 2
+    vim.api.nvim_create_autocmd('FileType', {
+      pattern = 'norg',
+      callback = function()
+        vim.wo.conceallevel = 2
+      end,
+    })
   end,
 }
