@@ -2,6 +2,10 @@ return {
   'saghen/blink.cmp',
   event = 'InsertEnter',
   version = '1.*',
+  dependencies = {
+    { 'L3MON4D3/LuaSnip', version = 'v2.*' },
+    'rafamadriz/friendly-snippets', -- snippet source
+  },
   opts = {
     keymap = {
       preset = 'enter',
@@ -25,6 +29,7 @@ return {
 
     fuzzy = { implementation = 'prefer_rust_with_warning' },
 
+    snippets = { preset = 'luasnip' },
     sources = {
       default = { 'lsp', 'path', 'snippets', 'lazydev' },
       providers = {

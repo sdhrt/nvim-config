@@ -421,7 +421,7 @@ require('lazy').setup({
   require 'custom.plugins.nvimtree',
   require 'custom.plugins.neorg',
   require 'custom.plugins.blink',
-  -- require 'custom.plugins.autotag',
+  require 'custom.plugins.luasnip',
 }, {
   ui = {
     icons = vim.g.have_nerd_font and {} or {
