@@ -366,12 +366,25 @@ require('lazy').setup({
     },
   },
 
+  {
+    'vague-theme/vague.nvim',
+    lazy = false, -- make sure we load this during startup if it is your main colorscheme
+    priority = 1000, -- make sure to load this before all the other plugins
+    config = function()
+      require('vague').setup {
+        transparent = false,
+        italic = false,
+      }
+      vim.cmd 'colorscheme vague'
+    end,
+  },
+
   { -- You can easily change to a different colorscheme.
     'webhooked/kanso.nvim',
-    priority = 1000, -- Make sure to load this before all the other start plugins.
-    config = function()
-      vim.cmd.colorscheme 'kanso-zen'
-    end,
+    -- priority = 1000, -- Make sure to load this before all the other start plugins.
+    -- config = function()
+    --   vim.cmd.colorscheme 'kanso-ink'
+    -- end,
   },
 
   -- Highlight todo, notes, etc in comments
@@ -382,35 +395,6 @@ require('lazy').setup({
     config = function()
       require('mini.ai').setup { n_lines = 500 }
       require('mini.surround').setup()
-      local statusline = require 'mini.statusline'
-      statusline.setup { use_icons = vim.g.have_nerd_font }
-      ---@diagnostic disable-next-line: duplicate-set-field
-      -- statusline.section_diagnostics { signs = {} }
-    end,
-  },
-
-  { -- Highlight, edit, and navigate code
-    'nvim-treesitter/nvim-treesitter',
-    build = ':TSUpdate',
-
-    dependencies = { 'windwp/nvim-ts-autotag' },
-    config = function()
-      require('nvim-treesitter.configs').setup {
-        modules = {},
-        sync_install = true,
-        ignore_install = {},
-        ensure_installed = { 'bash', 'c', 'diff', 'html', 'lua', 'luadoc', 'markdown', 'markdown_inline', 'query', 'vim', 'vimdoc' },
-        -- Autoinstall languages that are not installed
-        auto_install = false,
-        highlight = {
-          enable = true,
-        },
-        autotag = {
-          enable = true,
-        },
-        indent = { enable = true },
-      }
-      require('nvim-ts-autotag').setup()
     end,
   },
 
@@ -418,10 +402,15 @@ require('lazy').setup({
   require 'kickstart.plugins.gitsigns',
   require 'kickstart.plugins.indent_line',
   require 'kickstart.plugins.autopairs',
+
+  require 'custom.plugins.treesitter',
+  require 'custom.plugins.autotag',
   require 'custom.plugins.nvimtree',
   require 'custom.plugins.neorg',
   require 'custom.plugins.blink',
   require 'custom.plugins.luasnip',
+  require 'custom.plugins.lualine',
+  require 'custom.plugins.markview',
 }, {
   ui = {
     icons = vim.g.have_nerd_font and {} or {
