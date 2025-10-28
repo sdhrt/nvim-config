@@ -7,6 +7,12 @@ vim.g.maplocalleader = ' '
 vim.keymap.set('i', 'kk', '<Esc>')
 vim.keymap.set('n', '<Leader>d', vim.diagnostic.open_float)
 
+vim.keymap.set('n', 'K', function()
+    vim.lsp.buf.hover {
+        border = 'rounded',
+    }
+end)
+
 -- Set to true if you have a Nerd Font installed and selected in the terminal
 vim.g.have_nerd_font = true
 
@@ -304,11 +310,14 @@ require('lazy').setup({
             }
 
             local capabilities = require('blink.cmp').get_lsp_capabilities()
+
+            vim.lsp.config['tailwindcss'] = {
+                filetypes = { 'typescriptreact' },
+            }
+
             local servers = {
-                -- clangd = {},
-                -- gopls = {},
+                gopls = {},
                 pyright = {},
-                -- rust_analyzer = {},
                 ts_ls = {},
                 lua_ls = {
                     settings = {
@@ -323,7 +332,7 @@ require('lazy').setup({
 
             local ensure_installed = vim.tbl_keys(servers or {})
             vim.list_extend(ensure_installed, {
-                'stylua', -- Used to format Lua code
+                'stylua',
             })
             require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 
@@ -372,11 +381,10 @@ require('lazy').setup({
                 lua = { 'stylua' },
                 -- Conform can also run multiple formatters sequentially
                 python = { 'isort', 'black' },
-                --
                 -- You can use 'stop_after_first' to run the first available formatter from the list
                 javascript = { 'prettierd', 'prettier', stop_after_first = true },
-                typescriptreact = { 'prettierd', 'prettier', stop_after_first = true },
                 typescript = { 'prettierd', 'prettier', stop_after_first = true },
+                typescriptreact = { 'prettierd', 'prettier', stop_after_first = true },
             },
         },
     },
