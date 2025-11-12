@@ -10,21 +10,10 @@ return {
     ---@type blink.cmp.Config
     opts = {
         keymap = {
-            preset = 'default',
-            ['<CR>'] = { 'fallback' },
-            ['<C-y>'] = { 'select_and_accept' },
+            preset = 'super-tab',
         },
         completion = {
-            trigger = {
-                show_on_insert_on_trigger_character = true,
-                show_on_blocked_trigger_characters = {
-                    "'",
-                    '"',
-                    '(',
-                    '{',
-                    '[',
-                },
-            },
+            documentation = { auto_show_delay_ms = 50 },
         },
         signature = { enabled = true },
         fuzzy = { implementation = 'prefer_rust_with_warning' },

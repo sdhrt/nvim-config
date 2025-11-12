@@ -4,6 +4,9 @@
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
+vim.o.signcolumn = 'no'
+vim.opt.fillchars = { eob = ' ' }
+
 vim.keymap.set('i', 'kk', '<Esc>')
 vim.keymap.set('n', '<Leader>d', vim.diagnostic.open_float)
 
@@ -430,10 +433,11 @@ require('lazy').setup({
     require 'kickstart.plugins.gitsigns',
     require 'kickstart.plugins.indent_line',
     require 'kickstart.plugins.autopairs',
+    require 'kickstart.plugins.neo-tree',
 
     require 'custom.plugins.treesitter',
     require 'custom.plugins.autotag',
-    require 'custom.plugins.nvimtree',
+    -- require 'custom.plugins.nvimtree',
     require 'custom.plugins.neorg',
     require 'custom.plugins.blink',
     require 'custom.plugins.luasnip',
