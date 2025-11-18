@@ -24,8 +24,12 @@ vim.o.number = true
 
 vim.o.tabstop = 4
 
-vim.o.foldenable = true
-vim.o.foldmethod = 'indent'
+vim.o.foldenable = false
+vim.wo.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
+vim.wo.foldmethod = 'expr'
+
+vim.wo.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
+vim.wo.foldmethod = 'expr'
 
 -- Enable mouse mode, can be useful for resizing splits for example!
 vim.o.mouse = 'a'
@@ -391,19 +395,27 @@ require('lazy').setup({
             },
         },
     },
-
     {
-        'vague-theme/vague.nvim',
-        lazy = false, -- make sure we load this during startup if it is your main colorscheme
-        priority = 1000, -- make sure to load this before all the other plugins
+        'dgox16/oldworld.nvim',
+        lazy = false,
+        priority = 1000,
         config = function()
-            require('vague').setup {
-                transparent = false,
-                italic = false,
-            }
-            vim.cmd 'colorscheme vague'
+            vim.cmd 'colorscheme oldworld'
         end,
     },
+
+    -- {
+    --     'vague-theme/vague.nvim',
+    --     lazy = false, -- make sure we load this during startup if it is your main colorscheme
+    --     priority = 1000, -- make sure to load this before all the other plugins
+    --     config = function()
+    --         require('vague').setup {
+    --             transparent = false,
+    --             italic = false,
+    --         }
+    --         vim.cmd 'colorscheme vague'
+    --     end,
+    -- },
 
     { -- You can easily change to a different colorscheme.
         'webhooked/kanso.nvim',
@@ -437,12 +449,11 @@ require('lazy').setup({
 
     require 'custom.plugins.treesitter',
     require 'custom.plugins.autotag',
-    -- require 'custom.plugins.nvimtree',
-    require 'custom.plugins.neorg',
     require 'custom.plugins.blink',
     require 'custom.plugins.luasnip',
     require 'custom.plugins.lualine',
     require 'custom.plugins.markview',
+    require 'custom.plugins.obsidian',
 }, {
     ui = {
         icons = vim.g.have_nerd_font and {} or {
